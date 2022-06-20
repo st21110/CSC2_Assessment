@@ -27,7 +27,10 @@ Label(root, text="Receipt Number:").grid(row=7,column=2)
 Label(root, text="Row Number:").grid(row=11,column=2)
 
 #List values for item hire (updatable list)
-item_names = ["Chairs","Tables","Speakers"]
+item_names = ["Chairs","Tables","Speakers","Coloured Lights",
+"Helium Tanks", "Gas Barbeque","Marquees","Inflatable Pool",
+"Bubble Machine","Glassware","Microphone","Karaoke Machine",
+"Bouncy Castle","Cake Stand" ,"Fog Machine"]
 
 #Entries
 
@@ -52,3 +55,4 @@ receipt_number.grid(row=7,column=3)
 #Delete Row
 delete_item = Entry(root)
 delete_item .grid(row=11,column=3)
+
