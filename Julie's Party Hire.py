@@ -36,8 +36,17 @@ Label(root, font=(heading_font), text="Quantity Hired:",bg=bg_colour).grid(row=6
 Label(root, font=(heading_font), text="Receipt Number:",bg=bg_colour).grid(row=7,column=2)
 Label(root, font=(heading_font), text="Row Number:",bg=bg_colour).grid(row=13,column=2)
 
+#Clear labels to fix placements of headings and entries
+Label(root, text="").grid(row=1)
+Label(root, text="").grid(row=2)
+Label(root, text="").grid(row=14)
+
 #Main title heading
-Label(root,text="Julie's Party Hire", font='bold', fg='#f00').grid(row=1,column=3)
+Label(root,text="Julie's Party Hire", font='Arial 25 bold', fg='orange',bg=bg_colour).place(x=120,y=0)
+
+#Instruction sub heading
+Label(root,text="Enter Details.", font='Arial 10 bold', fg='red',bg=bg_colour).grid(row=3,column=2)
+Label(root,text="Delete Row.", font='Arial 10 bold', fg='red',bg=bg_colour).grid(row=12,column=2)
 
 #List values for item hire (updatable list)
 item_names = ["Chairs","Tables","Speakers","Coloured Lights",
