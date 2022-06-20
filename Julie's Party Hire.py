@@ -56,6 +56,24 @@ receipt_number.grid(row=7,column=3)
 delete_item = Entry(root)
 delete_item .grid(row=11,column=3)
 
+def entrybox_text():
+
+    customer_name.insert(0, "Full Name") #text inside entry box
+    def temp_text(e): #function to delete text in entry box
+        (customer_name).delete(0,END)
+    customer_name.bind("<FocusIn>", temp_text) #Deletes the temporory text once clicked on
+
+    quantity_hired.insert(0, "Item No. (1-500)") #text inside entry box
+    def temp_text2(e): #function to delete text in entry box
+        (quantity_hired).delete(0,END)
+    quantity_hired.bind("<FocusIn>", temp_text2) #Deletes the temporory text once clicked on
+
+    receipt_number.insert(0, "Receipt No.") #text inside entry box
+    def temp_text3(e): #function to delete text in entry box
+        (receipt_number).delete(0,END)
+    receipt_number.bind("<FocusIn>", temp_text3) #Deletes the temporory text once clicked on
+
+
 #Print details function 
 def print_details():
     global total_entries, name_count
@@ -78,6 +96,7 @@ def append_details():
         quantity_hired.delete(0,END)
         receipt_number.delete(0,END)
         total_entries += 1
+        entrybox_text()
 
 def delete_row ():
     global customer_details, delete_item, total_entries, name_count
@@ -99,6 +118,7 @@ Button(root,text="Delete",command=delete_row).grid(row=11,column=4)
 
 def main():
     global root, customer_details,total_entries
+    entrybox_text()
     customer_details = []
     total_entries = 0
     root.mainloop()
