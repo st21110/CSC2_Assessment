@@ -8,25 +8,33 @@ This code will use functions along side methods to produce an outcome.
 
 """
 
-#imports for the project
+#Imports for the project
 from tkinter import *
 from tkinter import ttk #for nicer boxes and buttons
 from tkinter import messagebox #for error messages 
 
-#Defining and Naming the root
+#GUI fonts and colours (so that it can be changed easily in the future or if I wanted to try out a new style)
+bg_colour = "OldLace" #background colour
+heading_font = "Helvetica 10 bold" #font size and type for headings
+
+#Root settings
 root = Tk()
 root.title("Julie's Party Hires")
+root.config(bg=bg_colour)
 
 #Quit Function
+'''
+Command for quit button that exits the program
+'''
 def quit():
     exit()
 
 #Labels for entries
-Label(root, text="Customer Name:").grid(row=4,column=2)
-Label(root, text="Item Hired:").grid(row=5,column=2)
-Label(root, text="Quantity Hired:").grid(row=6,column=2)
-Label(root, text="Receipt Number:").grid(row=7,column=2)
-Label(root, text="Row Number:").grid(row=11,column=2)
+Label(root, font=(heading_font), text="Customer Name:",bg=bg_colour).grid(row=4,column=2)
+Label(root, font=(heading_font), text="Item Hired:",bg=bg_colour).grid(row=5,column=2)
+Label(root, font=(heading_font), text="Quantity Hired:",bg=bg_colour).grid(row=6,column=2)
+Label(root, font=(heading_font), text="Receipt Number:",bg=bg_colour).grid(row=7,column=2)
+Label(root, font=(heading_font), text="Row Number:",bg=bg_colour).grid(row=13,column=2)
 
 #Main title heading
 Label(root,text="Julie's Party Hire", font='bold', fg='#f00').grid(row=1,column=3)
