@@ -24,7 +24,7 @@ root.config(bg=bg_colour)
 
 #Quit Function
 '''
-Command for quit button that exits the program
+Command for quit button that exits the program.
 '''
 def quit():
     exit()
@@ -62,58 +62,80 @@ customer_name.grid(row=4,column=3) #placement
 
 #Item Hired
 items=StringVar()
-item_hired = ttk.Combobox(root, textvariable = items, values =(item_names),
-state = "readonly",width=17)
-item_hired.grid(row=5, column=3)
+item_hired = ttk.Combobox(root, textvariable = items, values =(item_names), #comobobox that has values with a list
+state = "readonly",width=17) #readonly, so that is uneditable
+item_hired.grid(row=5, column=3) #placement
 
 #Quantity Hired
 quantity_hired = ttk.Entry(root)
-quantity_hired.grid(row=6,column=3)
+quantity_hired.grid(row=6,column=3) #placement
 
 #Receipt Number
 receipt_number = ttk.Entry(root)
-receipt_number.grid(row=7,column=3)
+receipt_number.grid(row=7,column=3) #placement
 
 #Delete Row
 delete_item = ttk.Entry(root)
-delete_item .grid(row=13,column=3)
+delete_item .grid(row=13,column=3) #placement
 
-
+#Entrybox text
+'''
+Function for text that will appear inside entry boxes that tells the user what infomation is being asked for.
+The text inside should be removed/cleared once the user clicks inside the box.
+This function will be called everytime the details get appended and when the programn starts.
+'''
 def entrybox_text():
 
     customer_name.insert(0, "Full Name") #text inside entry box
     def temp_text(e): #function to delete text in entry box
         (customer_name).delete(0,END)
-    customer_name.bind("<FocusIn>", temp_text) #deletes the temporory text once clicked on
+    customer_name.bind("<FocusIn>", temp_text) #deletes the temporary text once clicked on
 
     quantity_hired.insert(0, "Item No. (1-500)") #text inside entry box
     def temp_text2(e): #function to delete text in entry box
         (quantity_hired).delete(0,END)
-    quantity_hired.bind("<FocusIn>", temp_text2) #deletes the temporory text once clicked on
+    quantity_hired.bind("<FocusIn>", temp_text2) #deletes the temporary text once clicked on
 
     receipt_number.insert(0, "Receipt No.") #text inside entry box
     def temp_text3(e): #function to delete text in entry box
         (receipt_number).delete(0,END)
-    receipt_number.bind("<FocusIn>", temp_text3) #deletes the temporory text once clicked on
+    receipt_number.bind("<FocusIn>", temp_text3) #deletes the temporary text once clicked on
 
+#Entry box text for delete row
+'''
+Function for text that will appear inside delete item entry box which tells user a number should be entered.
+The text inside should be removed/cleared once the user clicks inside the box.
+This function will be called everytime a row gets deleted and when the programn starts.
+'''
 def deleterow_text():
     delete_item.insert(0, "Row No.") #text inside entry box
     def temp_text4(e): #function to delete text in entry box
         (delete_item).delete(0,END)
-    delete_item.bind("<FocusIn>", temp_text4) #deletes the temporory text once clicked on
+    delete_item.bind("<FocusIn>", temp_text4) #deletes the temporary text once clicked on
 
 #Print details function 
+'''
+This function will print the details the user has entered inside the entry boxes and
+print the headings the details will be printed under.
+'''
 def print_details():
     global total_entries, name_count #global variables used
     name_count = 0
     
+    #Headings for details printed
+    Label(root, font=(heading_font), text="Row #",bg=bg_colour).grid(row=15,column=1)
+    Label(root, font=(heading_font), text="Customer Name",bg=bg_colour).grid(row=15,column=2)
+    Label(root, font=(heading_font), text="Item Hired",bg=bg_colour).grid(row=15,column=3)
+    Label(root, font=(heading_font), text="Quantity Hired",bg=bg_colour).grid(row=15,column=4)
+    Label(root, font=(heading_font), text="Receipt Number",bg=bg_colour).grid(row=15,column=5)
+
     while name_count < total_entries :
-        #Labels that print the details
-        Label(root, text=name_count).grid(column=0,row=name_count+13) 
-        Label(root, text=(customer_details[name_count][0])).grid(column=1,row=name_count+13)
-        Label(root, text=(customer_details[name_count][1])).grid(column=2,row=name_count+13)
-        Label(root, text=(customer_details[name_count][2])).grid(column=3,row=name_count+13)
-        Label(root, text=(customer_details[name_count][3])).grid(column=4,row=name_count+13)
+        #Labels for details printed
+        Label(root,bg=bg_colour, text=name_count).grid(column=1,row=name_count+16) 
+        Label(root,bg=bg_colour, text=(customer_details[name_count][0])).grid(column=2,row=name_count+16)
+        Label(root,bg=bg_colour, text=(customer_details[name_count][1])).grid(column=3,row=name_count+16)
+        Label(root,bg=bg_colour, text=(customer_details[name_count][2])).grid(column=4,row=name_count+16)
+        Label(root,bg=bg_colour, text=(customer_details[name_count][3])).grid(column=5,row=name_count+16)
         name_count +=  1
 
 def append_details():
