@@ -55,9 +55,10 @@ item_names = ["Chairs","Tables","Speakers","Coloured Lights",
 "Bouncy Castle","Cake Stand" ,"Fog Machine"]
 
 #Entries
+
 #Customer Name
-customer_name = Entry(root)
-customer_name.grid(row=4,column=3) #Placement
+customer_name = ttk.Entry(root)
+customer_name.grid(row=4,column=3) #placement
 
 #Item Hired
 items=StringVar()
@@ -66,16 +67,17 @@ state = "readonly",width=17)
 item_hired.grid(row=5, column=3)
 
 #Quantity Hired
-quantity_hired = Entry(root)
+quantity_hired = ttk.Entry(root)
 quantity_hired.grid(row=6,column=3)
 
 #Receipt Number
-receipt_number = Entry(root)
+receipt_number = ttk.Entry(root)
 receipt_number.grid(row=7,column=3)
 
 #Delete Row
-delete_item = Entry(root)
-delete_item .grid(row=11,column=3)
+delete_item = ttk.Entry(root)
+delete_item .grid(row=13,column=3)
+
 
 def entrybox_text():
 
@@ -235,10 +237,10 @@ def delete_error():
         delete_row() #row will be deleted
 
 #Buttons
-Button(root, text="Append",command=entry_check,width=17).grid(row=8,column=3)
-Button(root, text="Print Details",command=print_details,width=17).grid(row=8,column=4)
-Button(root,text="Quit",command=quit).grid(row=13,column=5)
-Button(root,text="Delete",command=delete_error).grid(row=11,column=4)
+ttk.Button(root, text="Append",command=entry_check,width=20).grid(row=8,column=3)
+ttk.Button(root, text="Print Details",command=print_details,width=20).grid(row=8,column=4)
+ttk.Button(root,text="Delete",command=delete_error).grid(row=13,column=4)
+ttk.Button(root,text="Quit",command=quit).grid(row=13,column=5)
 
 def main():
     global root, customer_details,total_entries
