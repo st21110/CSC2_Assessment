@@ -79,11 +79,23 @@ def append_details():
         receipt_number.delete(0,END)
         total_entries += 1
 
+def delete_row ():
+    global customer_details, delete_item, total_entries, name_count
+    del customer_details[int(delete_item.get())]
+    total_entries = total_entries -1
+    delete_item.delete(0,END)
+    Label(root, text="                   ").grid(column=0,row=name_count+12) 
+    Label(root, text="                   ").grid(column=1,row=name_count+12)
+    Label(root, text="                   ").grid(column=2,row=name_count+12)
+    Label(root, text="                   ").grid(column=3,row=name_count+12)
+    Label(root, text="                   ").grid(column=4,row=name_count+12)
+    print_details()
+
 #Buttons
 Button(root, text="Append",command=append_details,width=17).grid(row=8,column=3)
 Button(root, text="Print Details",command=print_details,width=17).grid(row=8,column=4)
 Button(root,text="Quit",command=quit).grid(row=13,column=5)
-
+Button(root,text="Delete",command=delete_row).grid(row=11,column=4)
 
 def main():
     global root, customer_details,total_entries
