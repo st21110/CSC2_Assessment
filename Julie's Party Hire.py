@@ -73,6 +73,11 @@ def entrybox_text():
         (receipt_number).delete(0,END)
     receipt_number.bind("<FocusIn>", temp_text3) #Deletes the temporory text once clicked on
 
+def deleterow_text():
+    delete_item.insert(0, "Row No.") #text inside entry box
+    def temp_text4(e): #function to delete text in entry box
+        (delete_item).delete(0,END)
+    delete_item.bind("<FocusIn>", temp_text4) #Deletes the temporory text once clicked on
 
 #Print details function 
 def print_details():
@@ -109,6 +114,7 @@ def delete_row ():
     Label(root, text="                   ").grid(column=3,row=name_count+12)
     Label(root, text="                   ").grid(column=4,row=name_count+12)
     print_details()
+    deleterow_text()
 
 #Buttons
 Button(root, text="Append",command=append_details,width=17).grid(row=8,column=3)
@@ -119,6 +125,7 @@ Button(root,text="Delete",command=delete_row).grid(row=11,column=4)
 def main():
     global root, customer_details,total_entries
     entrybox_text()
+    deleterow_text()
     customer_details = []
     total_entries = 0
     root.mainloop()
