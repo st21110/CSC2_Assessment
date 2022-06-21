@@ -55,7 +55,6 @@ item_names = ["Chairs","Tables","Speakers","Coloured Lights",
 "Bouncy Castle","Cake Stand" ,"Fog Machine"]
 
 #Entries
-
 #Customer Name
 customer_name = ttk.Entry(root)
 customer_name.grid(row=4,column=3) #placement
@@ -138,6 +137,10 @@ def print_details():
         Label(root,bg=bg_colour, text=(customer_details[name_count][3])).grid(column=5,row=name_count+16)
         name_count +=  1
 
+#Append details function
+'''
+Function that clears all details entered and prepares it for printing
+'''
 def append_details():
     global customer_details,customer_name,item_hired,quantity_hired,receipt_number,total_entries #global variables used
     if len(customer_name.get()) != 0:
@@ -149,21 +152,31 @@ def append_details():
         total_entries += 1
         entrybox_text()
 
+#Delete row function
+'''
+This function will delete a row which is chosen by the user. 
+'''
 def delete_row ():
-    global customer_details, delete_item, total_entries, name_count #global variables used
+    global customer_details, delete_item, total_entries, name_count
     del customer_details[int(delete_item.get())]
     total_entries = total_entries -1
     delete_item.delete(0,END)
-    Label(root, text="                   ").grid(column=0,row=name_count+12) 
-    Label(root, text="                   ").grid(column=1,row=name_count+12)
-    Label(root, text="                   ").grid(column=2,row=name_count+12)
-    Label(root, text="                   ").grid(column=3,row=name_count+12)
-    Label(root, text="                   ").grid(column=4,row=name_count+12)
+    Label(root, text="                          ", bg = bg_colour).grid(column=1,row=name_count+15)
+    Label(root, text="                          ", bg = bg_colour).grid(column=2,row=name_count+15)
+    Label(root, text="                          ", bg = bg_colour).grid(column=3,row=name_count+15)
+    Label(root, text="                          ", bg = bg_colour).grid(column=4,row=name_count+15)
+    Label(root, text="                          ", bg = bg_colour).grid(column=5,row=name_count+15)
     print_details()
     deleterow_text()
 
-#Checking for input errors
 
+#Checking for input errors
+'''
+Function that checks for input validity 
+(makes sure entry isnt empty or something that doesn't meet Julie's requirements)
+If an error is present a messagebox displaying the error message will popup. 
+Details will not append if input check does not equal 0
+'''
 def entry_check():
     global customer_name, item_hired, quantity_hired, receipt_number, total_entries #global variables used
     input_check = 0 #variable for checking if errors are present
@@ -231,6 +244,11 @@ def entry_check():
 
 
 #Checking for input errors in delete row
+'''
+Function checks if entry in delete item is a number.
+If invalid character is entered a message box displaying an error message
+will popup.
+'''
 def delete_error():
     global delete_item, total_entries #global variables used
     delete_check = 0 #variable for checking if errors are present
@@ -271,6 +289,5 @@ def main():
     customer_details = []
     total_entries = 0
     root.mainloop()
-
 
 main() 
