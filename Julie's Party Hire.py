@@ -9,7 +9,7 @@ This code will use functions along side methods to produce an outcome.
 """
 
 #Imports for the project
-from tkinter import *
+from tkinter import * #to make GUI
 from tkinter import ttk #for nicer boxes and buttons
 from tkinter import messagebox #for error messages 
 
@@ -157,7 +157,7 @@ def append_details():
 This function will delete a row which is chosen by the user. 
 '''
 def delete_row ():
-    global customer_details, delete_item, total_entries, name_count
+    global customer_details, delete_item, total_entries, name_count #global variables used
     del customer_details[int(delete_item.get())]
     total_entries = total_entries -1
     delete_item.delete(0,END)
@@ -223,6 +223,10 @@ def entry_check():
             messagebox.showerror("Quantity Hired", "Item quantity is required.") #message box with error will pop up
             input_check = 1 #input check will equal 1 
 
+        if quantity_hired.get().startswith('-'):
+            messagebox.showerror("Quantity Hired", "Quantity hired must be between 1 and 500.") #message box with error will pop up
+            input_check = 1 #input check will equal 1 
+
         #if quanitiy hired is empty
         if len(quantity_hired.get()) == 0:
             messagebox.showerror("Quantity Hired", "Item quantity is required.") #message box with error will pop up
@@ -282,11 +286,12 @@ ttk.Button(root, text="Print Details",command=print_details,width=20).grid(row=8
 ttk.Button(root,text="Delete",command=delete_error).grid(row=13,column=4)
 ttk.Button(root,text="Quit",command=quit).grid(row=13,column=5)
 
+#Mainloops and startup functions
 def main():
-    global root, customer_details,total_entries
-    entrybox_text()
-    deleterow_text()
-    customer_details = []
+    global root, customer_details, total_entries #global variables used
+    entrybox_text() #inserts entrybox text on startup
+    deleterow_text() #inserts entrybox text in delete row on startup
+    customer_details = [] #creates emtpy list for customer details and empty variable for entries in the list
     total_entries = 0
     root.mainloop()
 
