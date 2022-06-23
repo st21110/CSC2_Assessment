@@ -62,7 +62,7 @@ customer_name.grid(row=4,column=3) #placement
 #Item Hired
 items=StringVar()
 item_hired = ttk.Combobox(root, textvariable = items, values =(item_names), #comobobox that has values with a list
-state = "readonly",width=17) #readonly, so that is uneditable
+state = "readonly",width=17) #readonly, so that it is uneditable
 item_hired.grid(row=5, column=3) #placement
 
 #Quantity Hired
@@ -139,18 +139,20 @@ def print_details():
 
 #Append details function
 '''
-Function that clears all details entered and prepares it for printing
+Function that clears all details entered, adds it to the customer details list
+and prepares it for printing.
+This is also where entrybox text gets placed back into the entry.
 '''
 def append_details():
     global customer_details,customer_name,item_hired,quantity_hired,receipt_number,total_entries #global variables used
     if len(customer_name.get()) != 0:
-        customer_details.append([customer_name.get(),item_hired.get(),quantity_hired.get(),receipt_number.get()])
-        customer_name.delete(0,END)
+        customer_details.append([customer_name.get(),item_hired.get(),quantity_hired.get(),receipt_number.get()]) #adds details to list
+        customer_name.delete(0,END) #deletes inputed details
         item_hired.set("")
-        quantity_hired.delete(0,END)
-        receipt_number.delete(0,END)
+        quantity_hired.delete(0,END) 
+        receipt_number.delete(0,END) 
         total_entries += 1
-        entrybox_text()
+        entrybox_text() #returns entrybox texts
 
 #Delete row function
 '''
@@ -181,13 +183,8 @@ def entry_check():
     global customer_name, item_hired, quantity_hired, receipt_number, total_entries #global variables used
     input_check = 0 #variable for checking if errors are present
 
-    #if customer name is empty
-    if len(customer_name.get()) == 0:
-        messagebox.showerror("Customer name", "Customer full name is required.") #message box with error will pop up
-        input_check = 1 #input check will equal 1 
-
-    #if customer name is same as entrybox text
-    if customer_name.get() == "Full Name":
+    #if customer name is empty or the same as entrybox text
+    if len(customer_name.get()) == 0 or customer_name.get() == "Full Name":
         messagebox.showerror("Customer name", "Customer full name is required.") #message box with error will pop up
         input_check = 1 #input check will equal 1 
     
@@ -196,12 +193,23 @@ def entry_check():
         messagebox.showerror("Item Hired", "Item name is required.") #message box with error will pop up
         input_check = 1 #input check will equal 1 
 
-    try: 
-        #if receipt number is same as entrybox text
-        if receipt_number.get() == "Receipt No.":
-            messagebox.showerror("Receipt Number", "Receipt number is required.") #message box with error will pop up
+    try:       
+        #if quanitiy hired is empty
+        if len(quantity_hired.get()) == 0:
+            messagebox.showerror("Quantity Hired", "Item quantity is required.") #message box with error will pop up
             input_check = 1 #input check will equal 1 
+
+        #if quantity hired is less than 1 or more than 500
+        if (quantity_hired.get().isdigit):
+            if int(quantity_hired.get()) <1 or int(quantity_hired.get()) > 500:
+                messagebox.showerror("Quantity Hired", "Quantity hired must be between 1 and 500.") #message box with error will pop up
+                input_check = 1 #input check will equal 1 
     
+    except:#in all other cases (strings or invalid characters)
+            messagebox.showerror("Quantity Hired", "Please enter a number.") #message box with error will pop up
+            input_check = 1 #input check will equal 1 
+
+    try:   
         #if receipt number is empty
         if len(receipt_number.get()) == 0:
             messagebox.showerror("Receipt Number", "Receipt number is required.") #message box with error will pop up
@@ -217,30 +225,6 @@ def entry_check():
             messagebox.showerror("Receipt Number", "Receipt number must be a number.") #message box with error will pop up
             input_check = 1 #input check will equal 1      
     
-    try:
-        #if quantity hired is the same as entrybox text
-        if quantity_hired.get() == "Item No. (1-500)":
-            messagebox.showerror("Quantity Hired", "Item quantity is required.") #message box with error will pop up
-            input_check = 1 #input check will equal 1 
-
-        if quantity_hired.get().startswith('-'):
-            messagebox.showerror("Quantity Hired", "Quantity hired must be between 1 and 500.") #message box with error will pop up
-            input_check = 1 #input check will equal 1 
-
-        #if quanitiy hired is empty
-        if len(quantity_hired.get()) == 0:
-            messagebox.showerror("Quantity Hired", "Item quantity is required.") #message box with error will pop up
-            input_check = 1 #input check will equal 1 
-
-        #if quantity hired is 0 or more than 500
-        if (quantity_hired.get().isdigit):
-            if int(quantity_hired.get()) == 0 or int(quantity_hired.get()) > 500:
-                messagebox.showerror("Quantity Hired", "Quantity hired must be between 1 and 500.") #message box with error will pop up
-                input_check = 1 #input check will equal 1 
-    
-    except:#in all other cases (strings or invalid characters)
-            messagebox.showerror("Quantity Hired", "Please enter a number.") #message box with error will pop up
-            input_check = 1 #input check will equal 1 
     
     #if input check equals 0 there is no errors
     if input_check == 0 : 
@@ -257,11 +241,6 @@ def delete_error():
     global delete_item, total_entries #global variables used
     delete_check = 0 #variable for checking if errors are present
     try:
-        #if delete item is the same as entrybox text
-        if delete_item.get() == "Row No.":
-            messagebox.showerror("Delete Row", "Please enter a row number.") #message box with error will pop up
-            delete_check = 1 #delete check will equal 1 
-
         #if delete item is empty
         if len(delete_item.get()) == 0:
             messagebox.showerror("Delete Row", "Please enter a row number.") #message box with error will pop up
@@ -293,6 +272,7 @@ def main():
     deleterow_text() #inserts entrybox text in delete row on startup
     customer_details = [] #creates emtpy list for customer details and empty variable for entries in the list
     total_entries = 0
+    root.resizable(False, False) #makes is so user unable to resize window.
     root.mainloop()
 
 main() 
