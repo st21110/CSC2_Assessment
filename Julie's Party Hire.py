@@ -4,7 +4,12 @@
 """
 Julie's Party Hire. 
 
-This code will use functions along side methods to produce an outcome. 
+This code will use functions along side methods to produce an outcome which
+stores details such as customer name, item hired, quantity hired, receipt number and
+as the ability to delete details once printed.
+
+To create the GUI I am using tkinter. In order to make the GUI look better
+I will also be using ttk as well as message boxes to display my error messages.
 
 """
 
@@ -18,16 +23,16 @@ bg_colour = "OldLace" #background colour
 heading_font = "Helvetica 10 bold" #font size and type for headings
 
 #Root settings
-root = Tk()
-root.title("Julie's Party Hires")
-root.config(bg=bg_colour)
+root = Tk() #naming root
+root.title("Julie's Party Hire") #giving root a title
+root.config(bg=bg_colour) #background colour of window
 
 #Quit Function
 '''
 Command for quit button that exits the program.
 '''
 def quit():
-    exit()
+    exit() #closes the window
 
 #Labels for entries
 Label(root, font=(heading_font), text="Customer Name:",bg=bg_colour).grid(row=4,column=2)
@@ -272,7 +277,7 @@ def main():
     deleterow_text() #inserts entrybox text in delete row on startup
     customer_details = [] #creates emtpy list for customer details and empty variable for entries in the list
     total_entries = 0
-    root.resizable(False, False) #makes is so user unable to resize window.
+    root.resizable(False, False) #stops window from being resized
     root.mainloop()
 
 main() 
